@@ -13,10 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class WalletService {
     
-    @Autowired
     private WalletRepository walletRepository;
-    @Autowired
     private AccountRepository accountRepository;
+
+    public WalletService(WalletRepository walletRepository, AccountRepository accountRepository) {
+        this.walletRepository = walletRepository;
+        this.accountRepository = accountRepository;
+    }
 
     public List<Wallet> getWalletByAccount(Long id){
         return walletRepository.findByAccountId(id);

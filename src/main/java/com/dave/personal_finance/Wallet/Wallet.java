@@ -1,13 +1,6 @@
 package com.dave.personal_finance.Wallet;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.dave.personal_finance.Account.Account;
 
@@ -28,18 +21,16 @@ public class Wallet {
     private Long id;
     @ManyToOne
     @JoinColumn(
-        name="account_id", 
-        nullable=false
+        name = "account_id",
+        nullable = false
     )
     private Account account;
-
     private String name;
 
     public Wallet(){}
 
-    public Wallet(Account account, String name){
+    public Wallet(String name){
         this.setName(name);
-        this.setAccount(account);
     }
 
     public String getName() {
