@@ -5,19 +5,17 @@ import java.util.List;
 import com.dave.personal_finance.AccountType.AccountType;
 import com.dave.personal_finance.AccountType.AccountTypeRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AccountService {
     
-    @Autowired
     private AccountRepository accountRepository;
-    @Autowired
     private AccountTypeRepository accountTypeRepository;
 
-    public AccountService(AccountRepository accountRepository){
+    public AccountService(AccountRepository accountRepository, AccountTypeRepository accountTypeRepository){
         this.accountRepository = accountRepository;
+        this.accountTypeRepository = accountTypeRepository;
     }
 
     public List<Account> getAccounts(){

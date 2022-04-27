@@ -3,6 +3,7 @@ package com.dave.personal_finance.Account;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +32,8 @@ public class AccountController {
      * @return
      */
     @GetMapping(path = "get-all")
-    public List<Account> getAccounts(){
-        return accountService.getAccounts();
+    public ResponseEntity<List<Account>> getAccounts(){
+        return ResponseEntity.ok(accountService.getAccounts());
     }
 
     /**
@@ -42,8 +43,8 @@ public class AccountController {
      * @return
      */
     @PostMapping(path = "insert")
-    public Account insertAccount(@RequestBody Account account){
-        return accountService.insertAccount(account);
+    public ResponseEntity<Account> insertAccount(@RequestBody Account account){
+        return ResponseEntity.ok(accountService.insertAccount(account));
     }
 
     /**
@@ -55,12 +56,12 @@ public class AccountController {
      * @return
      */
     @PutMapping(path = "{accountId}")
-    public Account updateAccount(
+    public ResponseEntity<Account> updateAccount(
         @PathVariable("accountId") Long id,
         @RequestParam(required = false) String name,
         @RequestParam(required = false) Long account_type_id
     ){
-        return accountService.updateAccount(id,name,account_type_id);
+        return ResponseEntity.ok(accountService.updateAccount(id,name,account_type_id));
     }
 
     /**

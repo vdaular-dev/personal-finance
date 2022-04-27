@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,10 @@ public class WalletController {
     
     private WalletService walletService;
 
+    public WalletController(WalletService walletService) {
+        this.walletService = walletService;
+    }
+
 
     /**
      * Return detail wallet by id
@@ -29,19 +34,19 @@ public class WalletController {
      * @return
      */
     @GetMapping(path = "{accountId}")
-    public List<Wallet> getWallet(@PathParam("accountId") Long id){
-        return walletService.getWalletByAccount(id);
+    public ResponseEntity<List<Wallet>> getWallet(@PathParam("accountId") Long id){
+        return ResponseEntity.ok(walletService.getWalletByAccount(id));
     }
 
     /**
      * Register a new wallet
-     * 
+     *
      * @param wallet
      * @return
      */
     @PostMapping(path = "insert")
-    public Wallet insertWallet(@RequestBody Wallet wallet){
-        return walletService.insertWallet(wallet);
+    public ResponseEntity<Wallet> insertWallet(@RequestBody Wallet wallet){
+        return ResponseEntity.ok(walletService.insertWallet(wallet));
     }
 
     /**
@@ -53,12 +58,12 @@ public class WalletController {
      * @return
      */
     @PutMapping(path = "{walletId}")
-    public Wallet updateWallet(
+    public ResponseEntity<Wallet> updateWallet(
         @PathParam("walletId") Long id,
         @RequestParam(required = false) String name,
         @RequestParam(required = false) Long accountId
     ){
-        return walletService.updateWallet(id, accountId, name);
+        return ResponseEntity.ok(walletService.updateWallet(id, accountId, name));
     }
 
     /**
